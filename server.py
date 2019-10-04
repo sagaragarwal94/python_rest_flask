@@ -48,6 +48,17 @@ class Tracks(Resource):
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
 
+    def post(self):
+        conn = db_connect.connect()
+        print(request.json)
+        TrackId = request.json['TrackId']
+        Name = request.json['Name']
+        Composer = request.json['Composer']
+        UnitPrice = request.json['UnitPrice']
+        query = conn.execute("insert into tracks values(null,'{0}','{1}','{2}','{3}')"
+                             .format(TrackId, Name, Composer, UnitPrice))
+        return {'status':'success'}
+
     
 class Employees_Name(Resource):
     def get(self, employee_id):
