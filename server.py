@@ -51,12 +51,17 @@ class Tracks(Resource):
     def post(self):
         conn = db_connect.connect()
         print(request.json)
-        TrackId = request.json['TrackId']
         Name = request.json['Name']
+        AlbumId = request.json['AlbumId']
+        MediaTypeId = request.json['MediaTypeId']
+        GenreId = request.json['GenreId']
         Composer = request.json['Composer']
+        Milliseconds = request.json['Milliseconds']
+        Bytes = request.json['Bytes']
         UnitPrice = request.json['UnitPrice']
-        query = conn.execute("insert into tracks values(null,'{0}','{1}','{2}','{3}')"
-                             .format(TrackId, Name, Composer, UnitPrice))
+        query = conn.execute("insert into tracks values(null,'{0}','{1}','{2}','{3}', \
+                             '{4}','{5}','{6}','{7}')".format(Name, AlbumId, MediaTypeId,
+                             GenreId, Composer, Milliseconds, Bytes, UnitPrice))
         return {'status':'success'}
 
     
